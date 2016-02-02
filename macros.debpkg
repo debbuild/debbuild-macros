@@ -3,6 +3,6 @@
 # Macro: %{mklibsymbols <name> <major>}
 # Generates the symbols file for a Debian package
 %mklibsymbols() \
-mkdir -p %{buildroot}/${1}/DEBIAN \
-%{__dpkg_gensymbols} -P%{buildroot} -p${1} -v%{version}-%{release} -e%{buildroot}%{_libdir}/${1}.so.${2} -e%{buildroot}%{_libdir}/${1}.so.${2}.* -O%{buildroot}/${1}${2}/DEBIAN/symbols \
+mkdir -p %{buildroot}/%{1}/DEBIAN \
+%{__dpkg_gensymbols} -P%{buildroot} -p%{1} -v%{version}-%{release} -e%{buildroot}%{_libdir}/%{1}.so.%{2} -e%{buildroot}%{_libdir}/%{1}.so.%{2}.* -O%{buildroot}/%{1}%{2}/DEBIAN/symbols \
 %{nil}
