@@ -24,6 +24,8 @@ Provides:       debbuild-macros-mga-mklibname
 Provides:       debbuild-macros-systemd
 %endif
 
+BuildArch:      noarch
+
 %description
 Various macros for debbuild
 
