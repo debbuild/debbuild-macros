@@ -1,0 +1,5 @@
+# Macro: %{mklibname <name> [<major> [<minor>]] [-s] [-d]}
+# - %{mklibname test}           => libtest
+# - %{mklibname test 1 -d}      => libtest1-dev
+# - %{mklibname test 1 -d 0 -s} => libtest1.0-static-dev
+%mklibname(ds)  lib%{1}%{?2:%{2}}%{?3:.%{3}}%{-s:-static}%{-d:-dev}
