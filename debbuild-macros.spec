@@ -55,7 +55,7 @@ install -pm 0644 macros.systemd %{buildroot}%{_debbuild_macrosdir}/macros.system
 %{_debbuild_macrosdir}/macros.cmake
 %{_debbuild_macrosdir}/macros.mga-mkrel
 %{_debbuild_macrosdir}/macros.mga-mklibname
-%if 0%{?debian} >= 8 || %{?ubuntu} >= 1504
+%if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 %{_debbuild_macrosdir}/macros.systemd
 %endif
 
