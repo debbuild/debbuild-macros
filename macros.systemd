@@ -5,13 +5,23 @@
 %_unitdir /lib/systemd/system
 %_userunitdir /usr/lib/systemd/user
 %_presetdir /lib/systemd/system-preset
+%_userpresetdir /usr/lib/systemd/user-preset
 %_udevhwdbdir /lib/udev/hwdb.d
 %_udevrulesdir /lib/udev/rules.d
 %_journalcatalogdir /usr/lib/systemd/catalog
 %_tmpfilesdir /usr/lib/tmpfiles.d
+%_modulesloaddir /usr/lib/modules-load.d
+%_modprobedir /lib/modprobe.d
 %_sysusersdir /usr/lib/sysusers.d
 %_sysctldir /usr/lib/sysctl.d
 %_binfmtdir /usr/lib/binfmt.d
+# systemd 231
+%_systemdgeneratordir /lib/systemd/system-generators
+%_systemdusergeneratordir /usr/lib/systemd/user-generators
+# systemd 233
+%_environmentdir /usr/lib/environment.d
+%_systemd_system_env_generator_dir /lib/systemd/system-environment-generators
+%_systemd_user_env_generator_dir /usr/lib/systemd/user-environment-generators
 
 
 %systemd_requires \
@@ -22,7 +32,7 @@ Requires(postun): systemd \
 %{nil}
 
 %systemd_post() \
-if [ "$1" = "install" ] ; then \
+if [ "$1" = "configure" ] ; then \
         # Initial installation \
         systemctl preset %{?*} >/dev/null 2>&1 || : \
 fi \
