@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # Macro: %{mklibname <name> [<major> [<minor>]] [-s] [-d]}
 # - %{mklibname test}           => libtest
 # - %{mklibname test 1 -d}      => libtest1-dev

@@ -2,6 +2,10 @@
 #
 # Macros for packages installing systemd unit files
 
+# Fedora-License-Identifier: LGPLv2+
+# SPDX-2.0-License-Identifier: LGPL-2.1+
+# SPDX-3.0-License-Identifier: LGPL-2.1-or-later
+
 %_unitdir /lib/systemd/system
 %_userunitdir /usr/lib/systemd/user
 %_presetdir /lib/systemd/system-preset

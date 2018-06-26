@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # Macro: %mkrel [-c <snapver>] <number>
 # - %mkrel 1                    => 1%{?subrel:.%subrel}%{?dist}
 # - %mkrel -c rc1 1             => 0.rc1.1%{?subrel:.%subrel}%{?dist}

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 %__dpkg_gensymbols /usr/bin/dpkg-gensymbols
 
 # Macro: %{mklibsymbols <name> <major>}
