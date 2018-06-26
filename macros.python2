@@ -1,0 +1,24 @@
+%__python2 /usr/bin/python2
+%python2_sitelib %(%{__python2} -Esc "from distutils.sysconfig import get_python_lib; print(get_python_lib())")
+%python2_sitearch %(%{__python2} -Esc "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")
+%python2_version %(%{__python2} -Esc "import sys; sys.stdout.write('{0.major}.{0.minor}'.format(sys.version_info))")
+%python2_version_nodots %(%{__python2} -Esc "import sys; sys.stdout.write('{0.major}{0.minor}'.format(sys.version_info))")
+%python2_pkgversion %{nil}
+
+%py2_shbang_opts -s
+
+%py2_build CFLAGS="%{optflags}" %{__python2} %{py_setup} %{?py_setup_args} build --executable="%{__python2} %{py2_shbang_opts}"
+%py2_install %{__python2} %{py_setup} %{?py_setup_args} install --no-compile -O0 --skip-build --root %{buildroot} --install-layout=deb
+
+%py2_bytecompile_requires \
+Requires(preun): python-minimal \
+Requires(post): python-minimal \
+%{nil}
+
+%py2_bytecompile_post() \
+pycompile -p %{1} -V -3.0 \
+%{nil}
+
+%py2_bytecompile_preun() \
+pyclean -p %{1} \
+%{nil}

@@ -1,0 +1,23 @@
+%__python /usr/bin/python
+%python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; import sys; sys.stdout.write(get_python_lib())")
+%python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; import sys; sys.stdout.write(get_python_lib(1))")
+%python_version %(%{__python} -c "import sys; sys.stdout.write(sys.version[:3])")
+
+%py_setup setup.py
+%py_shbang_opts -s
+
+%py_build CFLAGS="%{optflags}" %{__python} %{py_setup} %{?py_setup_args} build --executable="%{__python} %{py_shbang_opts}"
+%py_install %{__python} %{py_setup} %{?py_setup_args} install --no-compile -O0 --skip-build --root %{buildroot} --install-layout=deb
+
+%py_bytecompile_requires \
+Requires(preun): python-minimal \
+Requires(post): python-minimal \
+%{nil}
+
+%py_bytecompile_post() \
+pycompile -p %{1} \
+%{nil}
+
+%py_bytecompile_preun() \
+pyclean -p %{1} \
+%{nil}

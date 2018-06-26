@@ -1,0 +1,24 @@
+%__python3 /usr/bin/python3
+%python3_sitelib %(%{__python3} -Esc "from distutils.sysconfig import get_python_lib; print(get_python_lib())")
+%python3_sitearch %(%{__python3} -Esc "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")
+%python3_version %(%{__python3} -Esc "import sys; sys.stdout.write('{0.major}.{0.minor}'.format(sys.version_info))")
+%python3_version_nodots %(%{__python3} -Esc "import sys; sys.stdout.write('{0.major}{0.minor}'.format(sys.version_info))")
+%python3_pkgversion 3
+
+%py3_shbang_opts -s
+
+%py3_build CFLAGS="%{optflags}" %{__python3} %{py_setup} %{?py_setup_args} build --executable="%{__python3} %{py3_shbang_opts}"
+%py3_install %{__python3} %{py_setup} %{?py_setup_args} install --no-compile -O0 --skip-build --root %{buildroot} --install-layout=deb
+
+%py3_bytecompile_requires \
+Requires(preun): python3-minimal \
+Requires(post): python3-minimal \
+%{nil}
+
+%py3_bytecompile_post() \
+py3compile -p %{1} -V -4.0 \
+%{nil}
+
+%py3_bytecompile_preun() \
+py3clean -p %{1} \
+%{nil}
