@@ -5,8 +5,8 @@ Version:        1
 Release:        1%{?dist}
 Summary:        Various macros for extending debbuild functionality
 
-License:        CC0
-URL:            https://gitlab.com/Conan_Kudo/debbuild-macros
+License:        MIT and LGPLv2+
+URL:            https://pagure.io/debbuild-macros
 Source0:        %{name}-%{version}.tar.gz
 
 Requires:       debbuild
