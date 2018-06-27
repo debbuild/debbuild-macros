@@ -18,6 +18,10 @@ Provides:       debbuild-macros-cmake
 Provides:       debbuild-macros-mga-mkrel
 # Provides mga mklibname macros
 Provides:       debbuild-macros-mga-mklibname
+# Provides python macros
+Provides:       debbuild-macros-python
+Provides:       debbuild-macros-python2
+Provides:       debbuild-macros-python3
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 # Provides systemd macros
@@ -43,6 +47,9 @@ install -pm 0644 macros.debpkg %{buildroot}%{_debbuild_macrosdir}/macros.debpkg
 install -pm 0644 macros.cmake %{buildroot}%{_debbuild_macrosdir}/macros.cmake
 install -pm 0644 macros.mga-mkrel %{buildroot}%{_debbuild_macrosdir}/macros.mga-mkrel
 install -pm 0644 macros.mga-mklibname %{buildroot}%{_debbuild_macrosdir}/macros.mga-mklibname
+install -pm 0644 macros.python %{buildroot}%{_debbuild_macrosdir}/macros.python
+install -pm 0644 macros.python2 %{buildroot}%{_debbuild_macrosdir}/macros.python2
+install -pm 0644 macros.python3 %{buildroot}%{_debbuild_macrosdir}/macros.python3
 
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
@@ -55,6 +62,7 @@ install -pm 0644 macros.systemd %{buildroot}%{_debbuild_macrosdir}/macros.system
 %{_debbuild_macrosdir}/macros.cmake
 %{_debbuild_macrosdir}/macros.mga-mkrel
 %{_debbuild_macrosdir}/macros.mga-mklibname
+%{_debbuild_macrosdir}/macros.python*
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 %{_debbuild_macrosdir}/macros.systemd
 %endif
