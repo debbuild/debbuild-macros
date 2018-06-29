@@ -8,7 +8,6 @@
     export CXXFLAGS="${CXXFLAGS:-%{optflags}}"             \
     export FFLAGS="${FFLAGS:-%{optflags}}"                 \
     export FCFLAGS="${FCFLAGS:-%{optflags}}"               \
-    %{?ldflags:export LDFLAGS="${LDFLAGS:-%{ldflags}}"}    \
     %{__meson}                              \\\
         --buildtype=plain                   \\\
         --prefix=%{_prefix}                 \\\
