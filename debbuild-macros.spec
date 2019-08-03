@@ -6,8 +6,8 @@ Release:        1%{?dist}
 Summary:        Various macros for extending debbuild functionality
 
 License:        MIT and LGPLv2+
-URL:            https://pagure.io/debbuild-macros
-Source0:        %{name}-%{version}.tar.gz
+URL:            https://github.com/debbuild/debbuild-macros
+Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 
 Requires:       debbuild
 # Provides debpkg macros
@@ -58,6 +58,8 @@ install -pm 0644 macros.systemd %{buildroot}%{_debbuild_macrosdir}/macros.system
 
 %files
 %defattr(-,root,root,-)
+%doc README.md
+%license LICENSE*
 %{_debbuild_macrosdir}/macros.debpkg
 %{_debbuild_macrosdir}/macros.cmake
 %{_debbuild_macrosdir}/macros.mga-mkrel
