@@ -3,6 +3,7 @@
 #
 # Macros for cmake
 #
+%_cmake_shared_libs -DBUILD_SHARED_LIBS:BOOL=ON
 %_cmake_skip_rpath -DCMAKE_SKIP_RPATH:BOOL=ON
 %__cmake /usr/bin/cmake
 
@@ -13,10 +14,7 @@
 # - Set default install prefixes and library install directories
 # - Turn on shared libraries by default
 %cmake \
-  CFLAGS="${CFLAGS:-%optflags}" ; export CFLAGS ; \
-  CXXFLAGS="${CXXFLAGS:-%optflags}" ; export CXXFLAGS ; \
-  FFLAGS="${FFLAGS:-%optflags%{?_fmoddir: -I%_fmoddir}}" ; export FFLAGS ; \
-  FCFLAGS="${FCFLAGS:-%optflags%{?_fmoddir: -I%_fmoddir}}" ; export FCFLAGS ; \
+  %{set_build_flags}; \
   %__cmake \\\
         -DCMAKE_C_FLAGS_RELEASE:STRING="-DNDEBUG" \\\
         -DCMAKE_CXX_FLAGS_RELEASE:STRING="-DNDEBUG" \\\
@@ -27,4 +25,4 @@
         -DLIB_INSTALL_DIR:PATH=%{_libdir} \\\
         -DSYSCONF_INSTALL_DIR:PATH=%{_sysconfdir} \\\
         -DSHARE_INSTALL_PREFIX:PATH=%{_datadir} \\\
-        -DBUILD_SHARED_LIBS:BOOL=ON
+        %{?_cmake_shared_libs}
