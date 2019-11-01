@@ -2,30 +2,28 @@
 
 %__meson %{_bindir}/meson
 %__meson_wrap_mode nodownload
+%__meson_auto_features enabled
 
 %meson \
-    export CFLAGS="${CFLAGS:-%{optflags}}"                 \
-    export CXXFLAGS="${CXXFLAGS:-%{optflags}}"             \
-    export FFLAGS="${FFLAGS:-%{optflags}}"                 \
-    export FCFLAGS="${FCFLAGS:-%{optflags}}"               \
-    %{__meson}                              \\\
-        --buildtype=plain                   \\\
-        --prefix=%{_prefix}                 \\\
-        --libdir=%{_libdir}                 \\\
-        --libexecdir=%{_libexecdir}         \\\
-        --bindir=%{_bindir}                 \\\
-        --sbindir=%{_sbindir}               \\\
-        --includedir=%{_includedir}         \\\
-        --datadir=%{_datadir}               \\\
-        --mandir=%{_mandir}                 \\\
-        --infodir=%{_infodir}               \\\
-        --localedir=%{_datadir}/locale      \\\
-        --sysconfdir=%{_sysconfdir}         \\\
-        --localstatedir=%{_localstatedir}   \\\
-        --sharedstatedir=%{_sharedstatedir} \\\
-        --wrap-mode=%{__meson_wrap_mode}    \\\
-        %{_vpath_srcdir} %{_vpath_builddir} \\\
-        %{nil}
+    %{set_build_flags}; \
+    %{__meson}                                      \\\
+        --buildtype=plain                           \\\
+        --prefix=%{_prefix}                         \\\
+        --libdir=%{_libdir}                         \\\
+        --libexecdir=%{_libexecdir}                 \\\
+        --bindir=%{_bindir}                         \\\
+        --sbindir=%{_sbindir}                       \\\
+        --includedir=%{_includedir}                 \\\
+        --datadir=%{_datadir}                       \\\
+        --mandir=%{_mandir}                         \\\
+        --infodir=%{_infodir}                       \\\
+        --localedir=%{_datadir}/locale              \\\
+        --sysconfdir=%{_sysconfdir}                 \\\
+        --localstatedir=%{_localstatedir}           \\\
+        --sharedstatedir=%{_sharedstatedir}         \\\
+        --wrap-mode=%{__meson_wrap_mode}            \\\
+        --auto-features=%{__meson_auto_features}    \\\
+        %{_vpath_srcdir} %{_vpath_builddir}
 
 %meson_build \
     %ninja_build -C %{_vpath_builddir}
@@ -34,9 +32,4 @@
     %ninja_install -C %{_vpath_builddir}
 
 %meson_test \
-    %ninja_test -C %{_vpath_builddir} || \
-    ( rc=$?; \
-      echo "-----BEGIN TESTLOG-----"; \
-      cat %{_vpath_builddir}/meson-logs/testlog.txt; \
-      echo "-----END TESTLOG-----"; \
-      exit $rc; )
+    %{__meson} test -C %{_vpath_builddir} --print-errorlogs
