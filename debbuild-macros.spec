@@ -22,6 +22,8 @@ Provides:       debbuild-macros-mga-mklibname
 Provides:       debbuild-macros-python
 Provides:       debbuild-macros-python2
 Provides:       debbuild-macros-python3
+# Provides golang macros
+Provides:       debbuild-macros-golang
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 # Provides systemd macros
@@ -50,6 +52,7 @@ install -pm 0644 macros.mga-mklibname %{buildroot}%{_debbuild_macrosdir}/macros.
 install -pm 0644 macros.python %{buildroot}%{_debbuild_macrosdir}/macros.python
 install -pm 0644 macros.python2 %{buildroot}%{_debbuild_macrosdir}/macros.python2
 install -pm 0644 macros.python3 %{buildroot}%{_debbuild_macrosdir}/macros.python3
+install -pm 0644 macros.golang %{buildroot}%{_debbuild_macrosdir}/macros.golang
 
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
