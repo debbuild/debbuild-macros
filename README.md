@@ -12,3 +12,6 @@ Most of the macros are derived from Fedora or Mageia macros, which are licensed 
 
 The systemd macros are derived from macros shipped with systemd, and thus are licensed under the
 GNU Lesser General Public License, version 2.1 (or any later version, at your choice).
+
+The meson macros are derived from macros shipped with meson, and thus are licensed under the
+Apache Software License, version 2.0.
