@@ -8,7 +8,7 @@
 
 %__go_compiler gc
 
-%gobuild %{__go} build -buildmode pie %{?__go_compiler:-compiler %{__go_compiler}} -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n') %{?build_ldflags:-extldflags '%{build_ldflags} %{?__golang_extldflags}'}" -a -v -x
+%gobuild %{__go} build %{?_go_build_pie:-buildmode pie} %{?__go_compiler:-compiler %{__go_compiler}} -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n') %{?build_ldflags:-extldflags '%{build_ldflags} %{?__golang_extldflags}'}" -a -v -x
 
-%gotest %{__go} test -buildmode pie %{?__go_compiler:-compiler %{__go_compiler}} -ldflags "${LDFLAGS:-} %{?build_ldflags:-extldflags '%{build_ldflags} %{?__golang_extldflags}'}"
+%gotest %{__go} test %{?_go_build_pie:-buildmode pie} %{?__go_compiler:-compiler %{__go_compiler}} -ldflags "${LDFLAGS:-} %{?build_ldflags:-extldflags '%{build_ldflags} %{?__golang_extldflags}'}"
 
