@@ -45,6 +45,7 @@ Provides:       golang-deb-macros
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 # Provides systemd macros
 Provides:       debbuild-macros-systemd
+Provides:       systemd-deb-macros
 %endif
 
 BuildArch:      noarch
