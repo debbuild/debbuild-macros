@@ -41,6 +41,9 @@ Provides:       perl-deb-macros
 Provides:       debbuild-macros-golang
 Provides:       go-deb-macros
 Provides:       golang-deb-macros
+# Provides apache httpd macros
+Provides:       debbuild-macros-apache2
+Provides:       apache2-deb-macros
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 # Provides systemd macros
@@ -75,6 +78,7 @@ install -pm 0644 macros.python2 %{buildroot}%{_debmacrodir}/macros.python2
 install -pm 0644 macros.python3 %{buildroot}%{_debmacrodir}/macros.python3
 install -pm 0644 macros.perl %{buildroot}%{_debmacrodir}/macros.perl
 install -pm 0644 macros.golang %{buildroot}%{_debmacrodir}/macros.golang
+install -pm 0644 macros.apache2 %{buildroot}%{_debmacrodir}/macros.apache2
 
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
@@ -91,6 +95,7 @@ install -pm 0644 macros.systemd %{buildroot}%{_debmacrodir}/macros.systemd
 %{_debmacrodir}/macros.python*
 %{_debmacrodir}/macros.perl
 %{_debmacrodir}/macros.golang
+%{_debmacrodir}/macros.apache2
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 %{_debmacrodir}/macros.systemd
 %endif

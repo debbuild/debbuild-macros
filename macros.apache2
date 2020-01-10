@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: MIT
+
+%apache2_apxs %{_bindir}/apxs2
+%apache2_mmn %(%{apache2_apxs} -q HTTPD_MMN)
+%apache2_modconfdir %{_sysconfdir}/apache2/mods-available
+%apache2_confdir %{_sysconfdir}/apache2/conf-available
+%apache2_contentdir %{_datadir}/apache2
+%apache2_moddir %{_libexecdir}/apache2/modules
+
+# Fedora-ish names for compatibility
+%_httpd_mmn %{apache2_mmn}
+%_httpd_apxs %{apache2_apxs}
+%_httpd_modconfdir %{apache2_modconfdir}
+%_httpd_confdir %{apache2_confdir}
+%_httpd_contentdir %{apache2_contentdir}
+%_httpd_moddir %{apache2_moddir}
+
+
+%apache2_module_post() \
+if [ "$1" = "configure" ] ; then \
+        # Initial installation \
+        a2enmod %{1} >/dev/null 2>&1 || : \
+fi \
+%{nil}
+
+%apache2_module_preun() \
+if [ "$1" = "remove" ]; then \
+        # Package removal, not upgrade \
+        a2dismod %{1} > /dev/null 2>&1 || : \
+fi \
+if [ "$1" = "purge" ]; then \
+        # Package removal, not upgrade \
+        a2dismod -p %{1} > /dev/null 2>&1 || : \
+fi \
+%{nil}
+
+%apache2_conf_post() \
+if [ "$1" = "configure" ] ; then \
+        # Initial installation \
+        a2enconf %{1} >/dev/null 2>&1 || : \
+fi \
+%{nil}
+
+%apache2_conf_preun() \
+if [ "$1" = "remove" ]; then \
+        # Package removal, not upgrade \
+        a2disconf %{1} > /dev/null 2>&1 || : \
+fi \
+if [ "$1" = "purge" ]; then \
+        # Package removal, not upgrade \
+        a2disconf -p %{1} > /dev/null 2>&1 || : \
+fi \
+%{nil}
+
