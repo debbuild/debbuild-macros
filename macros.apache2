@@ -5,7 +5,7 @@
 %apache2_modconfdir %{_sysconfdir}/apache2/mods-available
 %apache2_confdir %{_sysconfdir}/apache2/conf-available
 %apache2_contentdir %{_datadir}/apache2
-%apache2_moddir %{_libexecdir}/apache2/modules
+%apache2_moddir %{_prefix}/lib/apache2/modules
 
 # Fedora-ish names for compatibility
 %_httpd_mmn %{apache2_mmn}
