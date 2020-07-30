@@ -2,7 +2,7 @@
 %{!?_debmacrodir: %global _debmacrodir %{_debconfigdir}/macros.d}
 
 Name:           debbuild-macros
-Version:        0.0.2
+Version:        0.0.3
 Release:        0%{?dist}
 Summary:        Various macros for extending debbuild functionality
 
@@ -101,6 +101,9 @@ rm -fv %{buildroot}%{_debmacrodir}/macros.systemd
 
 
 %changelog
+* Thu Jul 30 2020 Neal Gompa <ngompa13@gmail.com> - 0.0.3-0
+- New release
+
 * Fri Jan 10 2020 Neal Gompa <ngompa13@gmail.com> - 0.0.2-0
 - New release
 
