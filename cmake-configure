@@ -1,0 +1,18 @@
+#!/bin/bash
+# Shell wrapper for supporting out-of-source builds with CMake < 3.13
+# SPDX-License-Identifier: MIT
+
+# Collect arguments
+__cmake="$1"
+__cmake_srcdir="$(realpath $2)"
+__cmake_builddir="$(realpath $3)"
+__cmake_flags="${@:4}"
+__cmake_retval=0
+
+# Do the build
+mkdir -p "${__cmake_builddir}"
+pushd "${__cmake_builddir}"
+"${__cmake}" ${__cmake_flags} "${__cmake_srcdir}"
+__cmake_retval=$?
+popd
+exit ${__cmake_retval}

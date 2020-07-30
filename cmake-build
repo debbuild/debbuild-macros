@@ -1,0 +1,18 @@
+#!/bin/bash
+# Shell wrapper for supporting compiling with different backends for CMake < 3.13
+# SPDX-License-Identifier: MIT
+
+# Collect arguments
+__cmake_builddir="$(realpath $1)"
+__build_flags="${@:2}"
+
+if [ -f "${__cmake_builddir}/Makefile" ]; then
+	/usr/bin/make -C "${__cmake_builddir}" V=1 VERBOSE=1 ${__build_flags}
+	exit $?
+elif [ -f "${__cmake_builddir}/build.ninja" ]; then
+	/usr/bin/ninja -C "${__cmake_builddir}" -v ${__build_flags}
+	exit $?
+else
+	echo "Unknown build format, exiting!"
+	exit 99
+fi

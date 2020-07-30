@@ -19,6 +19,9 @@ URL:            https://github.com/debbuild/debbuild-macros
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 
 Requires:       debbuild >= 19.11.0
+%if (0%{?ubuntu} && 0%{?ubuntu} < 1604) || (0%{?debian} && 0%{?debian} < 8)
+Requires:       realpath
+%endif
 # Provides debpkg macros
 Provides:       debbuild-macros-debpkg
 # Provides cmake macros
@@ -47,6 +50,11 @@ Provides:       debbuild-macros-apache2
 Provides:       apache2-deb-macros
 # Provides gpgverify macros
 Provides:       debbuild-macros-gpgverify
+# Provides vpath macros
+Provides:       debbuild-macros-vpath
+# Provides ninja macros
+Provides:       debbuild-macros-ninja
+Provides:       ninja-deb-macros
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 # Provides systemd macros
@@ -73,6 +81,10 @@ with Debian Policy.
 %install
 mkdir -p %{buildroot}%{_debconfigdir}
 install -pm 0755 gpgverify %{buildroot}%{_debconfigdir}/gpgverify
+install -pm 0755 cmake-configure %{buildroot}%{_debconfigdir}/cmake-configure
+install -pm 0755 cmake-build %{buildroot}%{_debconfigdir}/cmake-build
+install -pm 0755 cmake-install %{buildroot}%{_debconfigdir}/cmake-install
+install -pm 0755 cmake-test %{buildroot}%{_debconfigdir}/cmake-test
 mkdir -p %{buildroot}%{_debmacrodir}
 install -pm 0644 macros.debpkg %{buildroot}%{_debmacrodir}/macros.debpkg
 install -pm 0644 macros.cmake %{buildroot}%{_debmacrodir}/macros.cmake
@@ -85,6 +97,8 @@ install -pm 0644 macros.perl %{buildroot}%{_debmacrodir}/macros.perl
 install -pm 0644 macros.golang %{buildroot}%{_debmacrodir}/macros.golang
 install -pm 0644 macros.apache2 %{buildroot}%{_debmacrodir}/macros.apache2
 install -pm 0644 macros.gpgverify %{buildroot}%{_debmacrodir}/macros.gpgverify
+install -pm 0644 macros.vpath %{buildroot}%{_debmacrodir}/macros.vpath
+install -pm 0644 macros.ninja %{buildroot}%{_debmacrodir}/macros.ninja
 
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
@@ -95,6 +109,7 @@ install -pm 0644 macros.systemd %{buildroot}%{_debmacrodir}/macros.systemd
 %doc README.md
 %license LICENSE*
 %{_debconfigdir}/gpgverify
+%{_debconfigdir}/cmake-*
 %{_debmacrodir}/macros.debpkg
 %{_debmacrodir}/macros.cmake
 %{_debmacrodir}/macros.mga-mkrel
@@ -104,6 +119,8 @@ install -pm 0644 macros.systemd %{buildroot}%{_debmacrodir}/macros.systemd
 %{_debmacrodir}/macros.golang
 %{_debmacrodir}/macros.apache2
 %{_debmacrodir}/macros.gpgverify
+%{_debmacrodir}/macros.vpath
+%{_debmacrodir}/macros.ninja
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 %{_debmacrodir}/macros.systemd
 %endif

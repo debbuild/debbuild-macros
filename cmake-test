@@ -1,0 +1,16 @@
+#!/bin/bash
+# Shell wrapper for supporting out-of-source builds with CTest
+# SPDX-License-Identifier: MIT
+
+# Collect arguments
+__ctest="$1"
+__ctest_builddir="$(realpath $2)"
+__ctest_flags="${@:3}"
+__ctest_retval=0
+
+# Run the tests
+pushd "${__ctest_builddir}"
+"${__ctest}" ${__ctest_flags}
+__ctest_retval=$?
+popd
+exit ${__ctest_retval}
