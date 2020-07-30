@@ -1,0 +1,2 @@
+# gpgverify verifies signed sources. There is documentation in the script.
+%gpgverify %{_debconfigdir}/gpgverify

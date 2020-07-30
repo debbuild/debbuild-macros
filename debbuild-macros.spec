@@ -1,4 +1,5 @@
-%{!?_debmacrodir: %global _debmacrodir %{_prefix}/lib/debbuild/macros.d}
+%{!?_debconfigdir: %global _debconfigdir %{_prefix}/lib/debbuild}
+%{!?_debmacrodir: %global _debmacrodir %{_debconfigdir}/macros.d}
 
 Name:           debbuild-macros
 Version:        0.0.2
@@ -8,10 +9,10 @@ Summary:        Various macros for extending debbuild functionality
 %if %{_vendor} == "debbuild"
 Group:          devel
 Packager:       debbuild developers <https://github.com/debbuild/debbuild>
-License:        MIT and LGPL-2.1+ and Apache-2.0
+License:        MIT and LGPL-2.1+ and Apache-2.0 and GPL-2.0+
 %else
 Group:          Development/Tools%{?suse_version:/Building}
-License:        MIT and LGPLv2+ and ASL 2.0
+License:        MIT and LGPLv2+ and ASL 2.0 and GPLv2+
 %endif
 
 URL:            https://github.com/debbuild/debbuild-macros
@@ -44,6 +45,8 @@ Provides:       golang-deb-macros
 # Provides apache httpd macros
 Provides:       debbuild-macros-apache2
 Provides:       apache2-deb-macros
+# Provides gpgverify macros
+Provides:       debbuild-macros-gpgverify
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 # Provides systemd macros
@@ -68,6 +71,8 @@ with Debian Policy.
 
 
 %install
+mkdir -p %{buildroot}%{_debconfigdir}
+install -pm 0755 gpgverify %{buildroot}%{_debconfigdir}/gpgverify
 mkdir -p %{buildroot}%{_debmacrodir}
 install -pm 0644 macros.debpkg %{buildroot}%{_debmacrodir}/macros.debpkg
 install -pm 0644 macros.cmake %{buildroot}%{_debmacrodir}/macros.cmake
@@ -79,6 +84,7 @@ install -pm 0644 macros.python3 %{buildroot}%{_debmacrodir}/macros.python3
 install -pm 0644 macros.perl %{buildroot}%{_debmacrodir}/macros.perl
 install -pm 0644 macros.golang %{buildroot}%{_debmacrodir}/macros.golang
 install -pm 0644 macros.apache2 %{buildroot}%{_debmacrodir}/macros.apache2
+install -pm 0644 macros.gpgverify %{buildroot}%{_debmacrodir}/macros.gpgverify
 
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
@@ -88,6 +94,7 @@ install -pm 0644 macros.systemd %{buildroot}%{_debmacrodir}/macros.systemd
 %files
 %doc README.md
 %license LICENSE*
+%{_debconfigdir}/gpgverify
 %{_debmacrodir}/macros.debpkg
 %{_debmacrodir}/macros.cmake
 %{_debmacrodir}/macros.mga-mkrel
@@ -96,6 +103,7 @@ install -pm 0644 macros.systemd %{buildroot}%{_debmacrodir}/macros.systemd
 %{_debmacrodir}/macros.perl
 %{_debmacrodir}/macros.golang
 %{_debmacrodir}/macros.apache2
+%{_debmacrodir}/macros.gpgverify
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 %{_debmacrodir}/macros.systemd
 %endif

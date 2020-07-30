@@ -15,3 +15,5 @@ GNU Lesser General Public License, version 2.1 (or any later version, at your ch
 
 The meson macros are derived from macros shipped with meson, and thus are licensed under the
 Apache Software License, version 2.0.
+
+Other files may have their own licensing as indicated within their sources.
