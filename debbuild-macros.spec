@@ -83,30 +83,13 @@ with Debian Policy.
 
 %install
 mkdir -p %{buildroot}%{_debconfigdir}
-install -pm 0755 gpgverify %{buildroot}%{_debconfigdir}/gpgverify
-install -pm 0755 cmake-configure %{buildroot}%{_debconfigdir}/cmake-configure
-install -pm 0755 cmake-build %{buildroot}%{_debconfigdir}/cmake-build
-install -pm 0755 cmake-install %{buildroot}%{_debconfigdir}/cmake-install
-install -pm 0755 cmake-test %{buildroot}%{_debconfigdir}/cmake-test
+cp -av gpgverify %{buildroot}%{_debconfigdir}
+cp -av cmake-* %{buildroot}%{_debconfigdir}
 mkdir -p %{buildroot}%{_debmacrodir}
-install -pm 0644 macros.debpkg %{buildroot}%{_debmacrodir}/macros.debpkg
-install -pm 0644 macros.cmake %{buildroot}%{_debmacrodir}/macros.cmake
-install -pm 0644 macros.mga-mkrel %{buildroot}%{_debmacrodir}/macros.mga-mkrel
-install -pm 0644 macros.mga-mklibname %{buildroot}%{_debmacrodir}/macros.mga-mklibname
-install -pm 0644 macros.python %{buildroot}%{_debmacrodir}/macros.python
-install -pm 0644 macros.python2 %{buildroot}%{_debmacrodir}/macros.python2
-install -pm 0644 macros.python3 %{buildroot}%{_debmacrodir}/macros.python3
-install -pm 0644 macros.perl %{buildroot}%{_debmacrodir}/macros.perl
-install -pm 0644 macros.golang %{buildroot}%{_debmacrodir}/macros.golang
-install -pm 0644 macros.apache2 %{buildroot}%{_debmacrodir}/macros.apache2
-install -pm 0644 macros.gpgverify %{buildroot}%{_debmacrodir}/macros.gpgverify
-install -pm 0644 macros.vpath %{buildroot}%{_debmacrodir}/macros.vpath
-install -pm 0644 macros.ninja %{buildroot}%{_debmacrodir}/macros.ninja
-install -pm 0644 macros.meson %{buildroot}%{_debmacrodir}/macros.meson
+cp -av macros.* %{buildroot}%{_debmacrodir}
 
-
-%if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
-install -pm 0644 macros.systemd %{buildroot}%{_debmacrodir}/macros.systemd
+%if (0%{?debian} && 0%{?debian} < 8) || (0%{?ubuntu} && 0%{?ubuntu} < 1504)
+rm -fv %{buildroot}%{_debmacrodir}/macros.systemd
 %endif
 
 %files
@@ -114,22 +97,7 @@ install -pm 0644 macros.systemd %{buildroot}%{_debmacrodir}/macros.systemd
 %license LICENSE*
 %{_debconfigdir}/gpgverify
 %{_debconfigdir}/cmake-*
-%{_debmacrodir}/macros.debpkg
-%{_debmacrodir}/macros.cmake
-%{_debmacrodir}/macros.mga-mkrel
-%{_debmacrodir}/macros.mga-mklibname
-%{_debmacrodir}/macros.python*
-%{_debmacrodir}/macros.perl
-%{_debmacrodir}/macros.golang
-%{_debmacrodir}/macros.apache2
-%{_debmacrodir}/macros.gpgverify
-%{_debmacrodir}/macros.vpath
-%{_debmacrodir}/macros.ninja
-%{_debmacrodir}/macros.meson
-%if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
-%{_debmacrodir}/macros.systemd
-%endif
-
+%{_debmacrodir}/macros.*
 
 
 %changelog
