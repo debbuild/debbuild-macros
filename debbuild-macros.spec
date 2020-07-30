@@ -55,6 +55,9 @@ Provides:       debbuild-macros-vpath
 # Provides ninja macros
 Provides:       debbuild-macros-ninja
 Provides:       ninja-deb-macros
+# Provides meson macros
+Provides:       debbuild-macros-meson
+Provides:       meson-deb-macros
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 # Provides systemd macros
@@ -99,6 +102,7 @@ install -pm 0644 macros.apache2 %{buildroot}%{_debmacrodir}/macros.apache2
 install -pm 0644 macros.gpgverify %{buildroot}%{_debmacrodir}/macros.gpgverify
 install -pm 0644 macros.vpath %{buildroot}%{_debmacrodir}/macros.vpath
 install -pm 0644 macros.ninja %{buildroot}%{_debmacrodir}/macros.ninja
+install -pm 0644 macros.meson %{buildroot}%{_debmacrodir}/macros.meson
 
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
@@ -121,6 +125,7 @@ install -pm 0644 macros.systemd %{buildroot}%{_debmacrodir}/macros.systemd
 %{_debmacrodir}/macros.gpgverify
 %{_debmacrodir}/macros.vpath
 %{_debmacrodir}/macros.ninja
+%{_debmacrodir}/macros.meson
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 %{_debmacrodir}/macros.systemd
 %endif
