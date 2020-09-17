@@ -58,6 +58,9 @@ Provides:       ninja-deb-macros
 # Provides meson macros
 Provides:       debbuild-macros-meson
 Provides:       meson-deb-macros
+# Provides AppArmor macros
+Provides:       debbuild-macros-apparmor
+Provides:       apparmor-deb-macros
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 # Provides systemd macros

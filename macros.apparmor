@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: MIT
+
+%apparmor_reload()\
+	if [ -x /bin/systemctl ]; then\
+		if /bin/systemctl is-active --quiet apparmor.service; then\
+			/sbin/apparmor_parser -r -T -W %{?*} &> /dev/null || :\
+		fi\
+	fi\
+%{nil}
