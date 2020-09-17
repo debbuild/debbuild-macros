@@ -61,6 +61,9 @@ Provides:       meson-deb-macros
 # Provides AppArmor macros
 Provides:       debbuild-macros-apparmor
 Provides:       apparmor-deb-macros
+# Provides firewalld macros
+Provides:       debbuild-macros-firewalld
+Provides:       firewalld-deb-macros
 
 %if 0%{?debian} >= 8 || 0%{?ubuntu} >= 1504
 # Provides systemd macros

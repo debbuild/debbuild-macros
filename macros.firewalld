@@ -1,0 +1,10 @@
+# Fedora-License-Identifier: GPLv2+
+# SPDX-2.0-License-Identifier: GPL-2.0+
+# SPDX-3.0-License-Identifier: GPL-2.0-or-later
+
+# RPM macros for packages installing firewalld services/zones
+
+# put this into %post otherwise firewalld won't load new service/zone file
+%firewalld_reload() \
+test -x %{_bindir}/firewall-cmd && firewall-cmd --reload --quiet || : \
+%{nil}
