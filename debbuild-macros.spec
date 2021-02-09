@@ -90,7 +90,7 @@ with Debian Policy.
 %install
 mkdir -p %{buildroot}%{_debconfigdir}
 cp -av gpgverify %{buildroot}%{_debconfigdir}
-cp -av cmake-* %{buildroot}%{_debconfigdir}
+cp -av cmake/cmake-* %{buildroot}%{_debconfigdir}
 mkdir -p %{buildroot}%{_debmacrodir}
 cp -av macros.* %{buildroot}%{_debmacrodir}
 
