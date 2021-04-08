@@ -1,0 +1,27 @@
+#!/bin/bash
+# Shell wrapper for installing pyproject-based code
+# SPDX-License-Identifier: MIT
+
+# Collect arguments
+__pyproject_pyinterp="$1"
+__pyproject_builddir="$2"
+__pyproject_wheeldir="$3"
+__pyproject_sitearchdir="$4"
+__pyproject_sitelibdir="$5"
+
+specifier=$(ls ${__pyproject_wheeldir}/*.whl | xargs basename --multiple | sed -E 's/([^-]+)-([^-]+)-.+\\\.whl/\\\1==\\\2/')
+export TMPDIR="${PWD}/${__pyproject_builddir}"
+${__pyproject_pyinterp} -m pip install --root ${RPM_BUILD_ROOT} --no-deps --disable-pip-version-check --progress-bar off --verbose --ignore-installed --no-warn-script-location --no-index --no-cache-dir --find-links ${__pyproject_wheeldir} $specifier
+if [ -d ${RPM_BUILD_ROOT}/usr/bin ]; then
+  pathfix.py -pni "%{__python3}" -k -as ${RPM_BUILD_ROOT}/usr/bin/*
+  rm -rfv ${RPM_BUILD_ROOT}/usr/bin/__pycache__
+fi
+if [ -d ${RPM_BUILD_ROOT}${__pyproject_sitelibdir} ]; then
+  sed -i 's/pip/deb/' ${RPM_BUILD_ROOT}${__pyproject_sitelibdir}/*.dist-info/INSTALLER
+fi
+if [ -d ${RPM_BUILD_ROOT}${__pyproject_sitearchdir} ]; then
+  sed -i 's/pip/deb/' ${RPM_BUILD_ROOT}${__pyproject_sitearchdir}/*.dist-info/INSTALLER
+fi
+
+
+exit $?

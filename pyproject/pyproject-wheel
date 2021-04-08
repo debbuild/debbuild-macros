@@ -1,0 +1,16 @@
+#!/bin/bash
+# Shell wrapper for make wheels with pip
+# SPDX-License-Identifier: MIT
+
+# Collect arguments
+__pyproject_pyinterp="$1"
+__pyproject_builddir="$2"
+__pyproject_wheeldir="$3"
+__build_flags="${@:4}"
+
+export TMPDIR="${PWD}/${__pyproject_builddir}"
+mkdir -p "${TMPDIR}"
+CFLAGS="${CFLAGS:-${RPM_OPT_FLAGS}}" LDFLAGS="${LDFLAGS:-${RPM_LD_FLAGS}}" \
+	${__pyproject_pyinterp} -m pip wheel --wheel-dir ${__pyproject_wheeldir} --no-deps --use-pep517 --no-build-isolation --disable-pip-version-check --no-clean --progress-bar off --verbose .
+
+exit $?

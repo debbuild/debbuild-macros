@@ -38,6 +38,9 @@ Provides:       debbuild-macros-python3
 Provides:       python-deb-macros
 Provides:       python2-deb-macros
 Provides:       python3-deb-macros
+# Provides pyproject macros
+Provides:       debbuild-macros-pyproject
+Provides:       pyproject-deb-macros
 # Provides perl macros
 Provides:       debbuild-macros-perl
 Provides:       perl-deb-macros
@@ -91,6 +94,7 @@ with Debian Policy.
 mkdir -p %{buildroot}%{_debconfigdir}
 cp -av gpgverify %{buildroot}%{_debconfigdir}
 cp -av cmake/cmake-* %{buildroot}%{_debconfigdir}
+cp -av pyproject/pyproject-* %{buildroot}%{_debconfigdir}
 mkdir -p %{buildroot}%{_debmacrodir}
 cp -av macros.* %{buildroot}%{_debmacrodir}
 
@@ -103,6 +107,7 @@ rm -fv %{buildroot}%{_debmacrodir}/macros.systemd
 %license LICENSE*
 %{_debconfigdir}/gpgverify
 %{_debconfigdir}/cmake-*
+%{_debconfigdir}/pyproject-*
 %{_debmacrodir}/macros.*
 
 
