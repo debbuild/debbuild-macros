@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+
+# RPM macros for packages creating system accounts
+#
+# Turn a sysusers.d file into macros specified by
+# https://docs.fedoraproject.org/en-US/packaging-guidelines/UsersAndGroups/#_dynamic_allocation
+
+%sysusers_requires_compat Requires(pre): passwd
+
+%sysusers_create_compat() \
+%(%{_debconfigdir}/sysusers.generate-pre.sh %{?*}) \
+%{nil}

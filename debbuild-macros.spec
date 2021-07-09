@@ -91,19 +91,20 @@ with Debian Policy.
 mkdir -p %{buildroot}%{_debconfigdir}
 cp -av gpgverify %{buildroot}%{_debconfigdir}
 cp -av cmake/cmake-* %{buildroot}%{_debconfigdir}
+cp -av sysusers.generate-pre.sh %{buildroot}%{_debconfigdir}
 mkdir -p %{buildroot}%{_debmacrodir}
 cp -av macros.* %{buildroot}%{_debmacrodir}
 
 %if (0%{?debian} && 0%{?debian} < 8) || (0%{?ubuntu} && 0%{?ubuntu} < 1504)
+rm -fv %{buildroot}%{_debconfigdir}/sysusers.generate-pre.sh
 rm -fv %{buildroot}%{_debmacrodir}/macros.systemd
+rm -fv %{buildroot}%{_debmacrodir}/macros.sysusers
 %endif
 
 %files
 %doc README.md
 %license LICENSE*
-%{_debconfigdir}/gpgverify
-%{_debconfigdir}/cmake-*
-%{_debmacrodir}/macros.*
+%{_debconfigdir}/*
 
 
 %changelog
