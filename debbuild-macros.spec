@@ -6,7 +6,7 @@ Version:        0.0.4
 Release:        0%{?dist}
 Summary:        Various macros for extending debbuild functionality
 
-%if %{_vendor} == "debbuild"
+%if "%{_vendor}" == "debbuild"
 Group:          devel
 Packager:       debbuild developers <https://github.com/debbuild/debbuild>
 License:        MIT and LGPL-2.1+ and Apache-2.0 and GPL-2.0+
