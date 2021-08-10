@@ -41,6 +41,9 @@ Provides:       python3-deb-macros
 # Provides perl macros
 Provides:       debbuild-macros-perl
 Provides:       perl-deb-macros
+# Provides ruby macros
+Provides:       debbuild-macros-ruby
+Provides:       ruby-deb-macros
 # Provides golang macros
 Provides:       debbuild-macros-golang
 Provides:       go-deb-macros
