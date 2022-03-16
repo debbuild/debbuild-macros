@@ -53,7 +53,7 @@ fi \
 %{nil}
 
 %systemd_user_preun() \
-if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then\ 
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then\
         # Package removal, not upgrade \
         systemctl --no-reload --user --global disable %{?*} > /dev/null 2>&1 || : \
 fi \
