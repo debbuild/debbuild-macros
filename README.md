@@ -4,8 +4,6 @@ This repository is a set of experimental RPM macros for [debbuild](https://githu
 designed in such a manner that it's trivial to port RPM packaging to build Debian packages that are
 mostly in-line with Debian Policy.
 
-At this point, some of them somewhat work, and some don't work as intended.
-
 # Licensing
 
 Most of the macros are derived from Fedora or Mageia macros, which are licensed under the MIT License.
