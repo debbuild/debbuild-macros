@@ -7,7 +7,12 @@
 %python2_version_nodots %(%{__python2} -Esc "import sys; sys.stdout.write('{0.major}{0.minor}'.format(sys.version_info))")
 %python2_pkgversion %{nil}
 
-%py2_shbang_opts -s
+%_py2_shebang_s s
+%_py2_shebang_P %(RPM_BUILD_ROOT= %{__python2} -Esc "import sys; print('P' if hasattr(sys.flags, 'safe_path') else '')")
+%py2_shbang_opts -%{?_py2_shebang_s}%{?_py2_shebang_P}
+%py2_shbang_opts_nodash %(opts=%{py2_shbang_opts}; echo ${opts#-})
+%py2_shebang_flags %(opts=%{py2_shbang_opts}; echo ${opts#-})
+%py2_shebang_fix  %{__python2} -B %{_debconfigdir}/pathfix.py -pni %{__python2} -ka%{py2_shebang_flags}
 
 %py2_build CFLAGS="%{optflags}" %{__python2} %{py_setup} %{?py_setup_args} build --executable="%{__python2} %{py2_shbang_opts}"
 %py2_install %{__python2} %{py_setup} %{?py_setup_args} install --no-compile -O0 --skip-build --root %{buildroot} --install-layout=deb
