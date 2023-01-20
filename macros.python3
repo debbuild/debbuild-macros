@@ -7,7 +7,12 @@
 %python3_version_nodots %(%{__python3} -Esc "import sys; sys.stdout.write('{0.major}{0.minor}'.format(sys.version_info))")
 %python3_pkgversion 3
 
-%py3_shbang_opts -s
+%_py3_shebang_s s
+%_py3_shebang_P %(RPM_BUILD_ROOT= %{__python3} -Esc "import sys; print('P' if hasattr(sys.flags, 'safe_path') else '')")
+%py3_shbang_opts -%{?_py3_shebang_s}%{?_py3_shebang_P}
+%py3_shbang_opts_nodash %(opts=%{py3_shbang_opts}; echo ${opts#-})
+%py3_shebang_flags %(opts=%{py3_shbang_opts}; echo ${opts#-})
+%py3_shebang_fix  %{__python3} -B %{_debconfigdir}/pathfix.py -pni %{__python3} -ka%{py3_shebang_flags}
 
 %py3_build CFLAGS="%{optflags}" %{__python3} %{py_setup} %{?py_setup_args} build --executable="%{__python3} %{py3_shbang_opts}"
 %py3_install %{__python3} %{py_setup} %{?py_setup_args} install --no-compile -O0 --skip-build --root %{buildroot} --install-layout=deb

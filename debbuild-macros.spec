@@ -94,6 +94,7 @@ with Debian Policy.
 mkdir -p %{buildroot}%{_debconfigdir}
 cp -av gpgverify %{buildroot}%{_debconfigdir}
 cp -av cmake/cmake-* %{buildroot}%{_debconfigdir}
+cp -av python/pathfix.py %{buildroot}%{_debconfigdir}
 cp -av sysusers.generate-pre.sh %{buildroot}%{_debconfigdir}
 mkdir -p %{buildroot}%{_debmacrodir}
 cp -av macros.* %{buildroot}%{_debmacrodir}

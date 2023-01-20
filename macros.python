@@ -6,7 +6,13 @@
 %python_version %(%{__python} -c "import sys; sys.stdout.write(sys.version[:3])")
 
 %py_setup setup.py
-%py_shbang_opts -s
+
+%_py_shebang_s s
+%_py_shebang_P %(RPM_BUILD_ROOT= %{__python} -Esc "import sys; print('P' if hasattr(sys.flags, 'safe_path') else '')")
+%py_shbang_opts -%{?_py_shebang_s}%{?_py_shebang_P}
+%py_shbang_opts_nodash %(opts=%{py_shbang_opts}; echo ${opts#-})
+%py_shebang_flags %(opts=%{py_shbang_opts}; echo ${opts#-})
+%py_shebang_fix  %{__python} -B %{_debconfigdir}/pathfix.py -pni %{__python} -ka%{py_shebang_flags}
 
 %py_build CFLAGS="%{optflags}" %{__python} %{py_setup} %{?py_setup_args} build --executable="%{__python} %{py_shbang_opts}"
 %py_install %{__python} %{py_setup} %{?py_setup_args} install --no-compile -O0 --skip-build --root %{buildroot} --install-layout=deb
