@@ -9,11 +9,10 @@ Summary:        Various macros for extending debbuild functionality
 %if "%{_vendor}" == "debbuild"
 Group:          devel
 Packager:       debbuild developers <https://github.com/debbuild/debbuild>
-License:        MIT and LGPL-2.1+ and Apache-2.0 and GPL-2.0+
 %else
 Group:          Development/Tools%{?suse_version:/Building}
-License:        MIT and LGPLv2+ and ASL 2.0 and GPLv2+
 %endif
+License:        MIT and LGPL-2.1-or-later and Apache-2.0 and PSF-2.0 and GPL-2.0-or-later
 
 URL:            https://github.com/debbuild/debbuild-macros
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
