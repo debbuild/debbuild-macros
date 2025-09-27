@@ -98,6 +98,12 @@ cp -av sysusers.generate-pre.sh %{buildroot}%{_debconfigdir}
 mkdir -p %{buildroot}%{_debmacrodir}
 cp -av macros.* %{buildroot}%{_debmacrodir}
 
+%if (0%{?debian} && 0%{?debian} < 13) || (0%{?ubuntu} && 0%{?ubuntu} < 2404)
+cp systemd/splitusr/macros.* %{buildroot}%{_debmacrodir}
+%else
+cp systemd/mergedusr/macros.* %{buildroot}%{_debmacrodir}
+%endif
+
 %if (0%{?debian} && 0%{?debian} < 8) || (0%{?ubuntu} && 0%{?ubuntu} < 1504)
 rm -fv %{buildroot}%{_debconfigdir}/sysusers.generate-pre.sh
 rm -fv %{buildroot}%{_debmacrodir}/macros.systemd
